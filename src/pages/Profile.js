@@ -5,7 +5,7 @@ import Header from '../components/Header'
 const Profile = () => {
     return (
         <>
-            <Header />
+            <Header displayLinks/>
             <div>
                 Profile
                 <MainTabs></MainTabs>

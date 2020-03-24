@@ -1,0 +1,21 @@
+.feed-card-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.feed-card-avatar {
+    width: 100;
+    height: 87;
+}
+.card-row {
+    display: flex;
+    justify-content: center;
+}
+
+.feed-card{
+    margin-top: 20px;
+}
+
+.feed-card-content{
+    display: flex;
+}

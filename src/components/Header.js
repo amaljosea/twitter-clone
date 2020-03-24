@@ -3,7 +3,7 @@ import { Navbar, Nav } from 'react-bootstrap'
 import Logo from '../images/logo.png'
 import './Header.css'
 
-const Login = () => {
+const Login = ({ displayLinks }) => {
     return (
         <Navbar className="nav-color" collapseOnSelect expand="lg" bg="light" variant="light">
             <Navbar.Brand href="/">
@@ -14,7 +14,7 @@ const Login = () => {
                 />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav">
+            {displayLinks && <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
 
                 </Nav>
@@ -23,7 +23,7 @@ const Login = () => {
                     <Nav.Link href="/users">Users</Nav.Link>
                     <Nav.Link href="/profile">Profile</Nav.Link>
                 </Nav>
-            </Navbar.Collapse>
+            </Navbar.Collapse>}
         </Navbar>
     )
 }
