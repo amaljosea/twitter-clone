@@ -1,10 +1,15 @@
 import React from 'react'
+import Header from '../components/Header'
+
 const Feed = () => {
     return (
-        <div>
-            Feed
-        </div>
+        <>
+            <Header />
+            <div>
+                Feed
+            </div>
+        </>
     )
-} 
+}
 
 export default Feed
