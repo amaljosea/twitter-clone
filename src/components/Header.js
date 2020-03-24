@@ -9,7 +9,7 @@ const Login = () => {
             <Navbar.Brand href="/">
                 <img
                     src={Logo}
-                    className="d-inline-block align-top"
+                    className="nav-logo"
                     alt="TweetX logo"
                 />
             </Navbar.Brand>

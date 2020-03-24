@@ -1,3 +1,6 @@
 .nav-color.bg-light {
     background-color: #fff!important;
 }
+.nav-logo{
+    margin-left: -25px;
+}
