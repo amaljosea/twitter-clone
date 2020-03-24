@@ -4,12 +4,12 @@ import ImageBackground from '../components/ImageBackground'
 import Container from '../components/Container'
 import { Button, Form, Row, Col } from 'react-bootstrap'
 import './Login.css'
-const Login = () => {
+const Login = (props) => {
     return (
         <ImageBackground>
             <Container>
                 <Header />
-                <Button variant="primary">Create Account</Button>
+                <Button variant="primary" onClick={() => props.history.push('/signup')}>Create Account</Button>
                 <h2 className="main-title">Login</h2>
                 <Row>
                     <Col xs={12} sm={4}>
