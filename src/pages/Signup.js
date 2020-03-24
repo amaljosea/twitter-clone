@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../components/Header'
 import ImageBackground from '../components/ImageBackground'
 import { Button, Form, Row, Col } from 'react-bootstrap'
 import Container from '../components/Container'
 import './Signup.css'
 const Signup = (props) => {
+    const [formValues, setFormValues] = useState({
+        name: "",
+        email: "",
+        password: "",
+        repeatPassword: ""
+    })
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        console.log(formValues)
+    }
+
     return (
         <ImageBackground>
             <Container>
@@ -13,18 +24,26 @@ const Signup = (props) => {
                 <h2 className="main-title">Create Account</h2>
                 <Row>
                     <Col xs={12} sm={4}>
-                        <Form>
-                            <Form.Group controlId="formBasicPassword">
-                                <Form.Control placeholder="Name" />
+                        <Form onSubmit={handleSubmit}>
+                            <Form.Group>
+                                <Form.Control value={formValues.name} placeholder="Name" required onChange={(e) => {
+                                    setFormValues({ ...formValues, name: e.target.value })
+                                }} />
                             </Form.Group>
-                            <Form.Group controlId="formBasicEmail">
-                                <Form.Control type="email" placeholder="Email" />
+                            <Form.Group>
+                                <Form.Control value={formValues.email} type="email" placeholder="Email" required onChange={(e) => {
+                                    setFormValues({ ...formValues, email: e.target.value })
+                                }}/>
                             </Form.Group>
-                            <Form.Group controlId="formBasicPassword">
-                                <Form.Control type="password" placeholder="Password" />
+                            <Form.Group>
+                                <Form.Control value={formValues.password} type="password" placeholder="Password" required onChange={(e) => {
+                                    setFormValues({ ...formValues, password: e.target.value })
+                                }}/>
                             </Form.Group>
-                            <Form.Group controlId="formBasicPassword">
-                                <Form.Control type="password" placeholder="Confirm Password" />
+                            <Form.Group>
+                                <Form.Control value={formValues.repeatPassword} type="password" placeholder="Confirm Password" required onChange={(e) => {
+                                    setFormValues({ ...formValues, repeatPassword: e.target.value })
+                                }}/>
                             </Form.Group>
                             <div className="form-bottom-container">
                                 <Button variant="primary" type="submit">
