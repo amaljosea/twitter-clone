@@ -4,7 +4,7 @@ import ImageBackground from '../components/ImageBackground'
 import { Button, Form, Row, Col } from 'react-bootstrap'
 import Container from '../components/Container'
 import './Signup.css'
-import firebaseApp from '../firebase'
+import firebase from 'firebase'
 
 const Signup = (props) => {
     const [formValues, setFormValues] = useState({
@@ -14,8 +14,8 @@ const Signup = (props) => {
         repeatPassword: ""
     })
     const handleSubmit = (event) => {
-        firebaseApp.auth().createUserWithEmailAndPassword(formValues.email, formValues.password)
         event.preventDefault()
+        firebase.auth().createUserWithEmailAndPassword(formValues.email, formValues.password)
         console.log(formValues)
     }
 
