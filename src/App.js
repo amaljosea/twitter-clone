@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
-import setupFirebase from './firebase/setup'
+import firebaseApp from './firebase'
 import Feed from './pages/Feed'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Signup from './pages/Signup'
 import Users from './pages/Users'
 import PrivateRoute from './components/PrivateRoute'
-
-import firebase from 'firebase'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -18,8 +16,7 @@ function App() {
   const { authenticated, loading } = state;
 
   useEffect(() => {
-    setupFirebase()
-    firebase.auth().onAuthStateChanged(user => {
+    firebaseApp.auth().onAuthStateChanged(user => {
       if (user) {
         setState({
           authenticated: true,
