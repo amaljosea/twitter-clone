@@ -8,7 +8,11 @@ const FeedCard = () => {
     return (
         <Card className="feed-card">
             <div className="feed-card-content">
-                <Card.Img src={Avatar} alt="avatar" variant="start" className="feed-card-avatar" />
+                <div>
+                    <div className="feed-card-avathar">
+
+                    </div>
+                </div>
                 <Card.Body><div className="feed-card-header">
                     <Card.Title>Special title treatment</Card.Title>
                     <p>10 mins ago</p>
@@ -19,7 +23,6 @@ const FeedCard = () => {
                         With supporting text below as a natural lead-in to additional content.
                          </Card.Text>
                 </Card.Body>
-                <Card.Img src={Background} alt="Card image" variant="end" />
             </div>
         </Card>
     )
