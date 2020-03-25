@@ -7,7 +7,11 @@ const SingleUser = () => {
     return (
         <ListGroup.Item className="user-list-content">
             <div className="user-list-text-container">
-                <img src={Avatar} alt="avatar" variant="start" className="feed-card-avatar" />
+                <div>
+                    <div className="user-list-avathar">
+
+                    </div>
+                </div>
                 <div>
                     <h4>Cras justo odio</h4>
                     <p>Following 200</p>
