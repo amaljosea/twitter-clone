@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import firebaseApp from './firebase'
 import Feed from './pages/Feed'
@@ -8,7 +7,7 @@ import Profile from './pages/Profile'
 import Signup from './pages/Signup'
 import Users from './pages/Users'
 import PrivateRoute from './components/PrivateRoute'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.scss';
 
 function App() {
 

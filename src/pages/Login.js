@@ -27,7 +27,7 @@ const Login = (props) => {
         <ImageBackground>
             <Container>
                 <Header />
-                <Button variant="primary" onClick={() => props.history.push('/signup')}>Create Account</Button>
+                <Button variant="secondary" onClick={() => props.history.push('/signup')}>Create Account</Button>
                 <h2 className="main-title">Login</h2>
                 <Row>
                     <Col xs={12} sm={4}>

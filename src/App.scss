@@ -1,0 +1,28 @@
+// Import Bootstrap and its default variables
+
+// change the theme
+$theme-colors: (
+  "primary":#ef728b,
+  "secondary": white
+);
+
+@import '~bootstrap/scss/bootstrap.scss';
+
+.btn-primary{
+    color: white;
+}
+
+.btn-secondary{
+  border: 1px solid black;
+}
+
+.btn {
+  border-radius: 0.5rem;
+  padding: 0.6rem 2rem;
+}
+
+.form-control {
+  height: calc(2.5em + 0.75rem + 2px);
+  background-color: #f9f9f9;
+  border: 0px;
+}
