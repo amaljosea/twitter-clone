@@ -22,7 +22,7 @@ const Profile = () => {
             <Header displayLinks />
             <TabsContainer>
                 <ProfileHead />
-                <Nav fill variant="tabs" activeKey="post" onSelect={(eventKey) => { setActiveTab(eventKey) }}>
+                <Nav fill variant="tabs" activeKey={activeTab} onSelect={(eventKey) => { setActiveTab(eventKey) }}>
                     <Nav.Item >
                         <Nav.Link eventKey="post">Post</Nav.Link>
                     </Nav.Item>

@@ -4,6 +4,8 @@ import ImageBackground from '../components/ImageBackground'
 import { Button, Form, Row, Col } from 'react-bootstrap'
 import Container from '../components/Container'
 import './Signup.css'
+import firebaseApp from '../firebase'
+
 const Signup = (props) => {
     const [formValues, setFormValues] = useState({
         name: "",
@@ -12,6 +14,7 @@ const Signup = (props) => {
         repeatPassword: ""
     })
     const handleSubmit = (event) => {
+        firebaseApp.auth().createUserWithEmailAndPassword(formValues.email, formValues.password)
         event.preventDefault()
         console.log(formValues)
     }
@@ -33,17 +36,17 @@ const Signup = (props) => {
                             <Form.Group>
                                 <Form.Control value={formValues.email} type="email" placeholder="Email" required onChange={(e) => {
                                     setFormValues({ ...formValues, email: e.target.value })
-                                }}/>
+                                }} />
                             </Form.Group>
                             <Form.Group>
                                 <Form.Control value={formValues.password} type="password" placeholder="Password" required onChange={(e) => {
                                     setFormValues({ ...formValues, password: e.target.value })
-                                }}/>
+                                }} />
                             </Form.Group>
                             <Form.Group>
                                 <Form.Control value={formValues.repeatPassword} type="password" placeholder="Confirm Password" required onChange={(e) => {
                                     setFormValues({ ...formValues, repeatPassword: e.target.value })
-                                }}/>
+                                }} />
                             </Form.Group>
                             <div className="form-bottom-container">
                                 <Button variant="primary" type="submit">
