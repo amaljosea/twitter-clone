@@ -1,16 +1,18 @@
 import React from 'react'
 import { MainTabs } from '../components/MainTabs'
 import Header from '../components/Header'
+import TabsContainer from '../components/TabsContainer'
+import Container from '../components/Container'
 
 const Profile = () => {
     return (
-        <>
+        <Container>
             <Header displayLinks/>
-            <div>
+            <TabsContainer>
                 Profile
                 <MainTabs></MainTabs>
-            </div>
-        </>
+            </TabsContainer>
+        </Container>
     )
 }
 
