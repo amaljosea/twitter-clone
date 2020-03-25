@@ -4,15 +4,23 @@ import ImageBackground from '../components/ImageBackground'
 import Container from '../components/Container'
 import { Button, Form, Row, Col } from 'react-bootstrap'
 import './Login.css'
+import firebaseApp from '../firebase'
+
 const Login = (props) => {
     const [formValues, setFormValues] = useState({
-        name: "",
+        email: "",
         password: "",
     })
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault()
         console.log(formValues)
-        props.history.push('/feed')
+        try {
+            const user = await firebaseApp.auth().signInWithEmailAndPassword(formValues.email, formValues.password)
+            console.log(user)
+            props.history.push("/");
+        } catch (error) {
+    
+        }
     }
 
     return (
@@ -26,7 +34,7 @@ const Login = (props) => {
                         <Form onSubmit={handleSubmit}>
                             <Form.Group >
                                 <Form.Control type="email" placeholder="Email" value={formValues.email} required onChange={(e) => {
-                                    setFormValues({ ...formValues, name: e.target.value })
+                                    setFormValues({ ...formValues, email: e.target.value })
                                 }}/>
                             </Form.Group>
                             <Form.Group >
