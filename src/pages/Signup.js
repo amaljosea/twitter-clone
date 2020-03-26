@@ -1,8 +1,10 @@
 import React, { useState, useContext } from 'react'
+
 import Header from '../components/Header'
 import ImageBackground from '../components/ImageBackground'
-import { Button, Form, Row, Col } from 'react-bootstrap'
 import Container from '../components/Container'
+import { Button, Form, Row, Col, Alert, Spinner } from 'react-bootstrap'
+
 import './Signup.css'
 import firebaseApp from '../firebase'
 import { UserContext } from '../App'
@@ -15,9 +17,13 @@ const Signup = (props) => {
         password: "",
         repeatPassword: ""
     })
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
+            setError(false)
+            setLoading(true)
             const user = await firebaseApp.auth().createUserWithEmailAndPassword(formValues.email, formValues.password)
             console.log(user)
 
@@ -33,7 +39,9 @@ const Signup = (props) => {
             setUserDetails(userDetails)
             props.history.push("/");
         } catch (error) {
-
+            setError(true)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -70,6 +78,10 @@ const Signup = (props) => {
                                 <Button variant="primary" type="submit">
                                     Signup
                                 </Button>
+                            </div>
+                            <div className="error-loading-container">
+                                {loading && <Spinner animation="border" variant="primary" />}
+                                {error && <Alert variant="danger">Something went wrong</Alert>}
                             </div>
                         </Form>
                     </Col>
