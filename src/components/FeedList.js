@@ -7,6 +7,9 @@ export const UserList = () => {
             <FeedCard />
             <FeedCard />
             <FeedCard />
+            <FeedCard />
+            <FeedCard />
+            <FeedCard />
         </>
     )
 }
