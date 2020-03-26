@@ -10,7 +10,7 @@ const api = {
         all: () => axios1.get("/allusers"),
         followers: () => axios1.get("/allusers"),
         following: () => axios2.get("/following"),
-        follow: (payload) => axios1.post("/follow", payload),
+        follow: (payload) => axios2.post("/follow", payload),
     }
 }
 export default api
