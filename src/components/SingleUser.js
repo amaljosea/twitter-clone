@@ -1,9 +1,8 @@
 import React from 'react'
 import { ListGroup, Button } from 'react-bootstrap'
-import Avatar from '../images/cardAvatar.png'
 import './SingleUser.css'
 
-const SingleUser = () => {
+const SingleUser = ({ id, name, isFollowing, followers, onFollowClick }) => {
     return (
         <ListGroup.Item className="user-list-content">
             <div className="user-list-text-container">
@@ -13,11 +12,11 @@ const SingleUser = () => {
                     </div>
                 </div>
                 <div>
-                    <h4>Cras justo odio</h4>
-                    <p>Following 200</p>
+                    <h4>{name}</h4>
+                    <p>Following {followers}</p>
                 </div>
             </div>
-            <Button>Follow</Button>
+            {isFollowing ? <p className="following-text">Following</p> : <Button onClick={() => onFollowClick(id)}>Follow</Button>}
         </ListGroup.Item>
     )
 }
