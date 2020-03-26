@@ -1,7 +1,12 @@
 import axiosLib from 'axios';
-
-const axios = axiosLib.create({
+//now all apis are mock
+// Free plan limit in no of api, so 2 accounts mockapi.io
+export const axios1 = axiosLib.create({
     baseURL: "http://5e7c2358a917d70016682eb7.mockapi.io/tweetx",
 });
 
-export default axios;
+export const axios2 = axiosLib.create({
+    baseURL: "http://5e7c40e4a917d70016683096.mockapi.io/tweetx",
+});
+
+

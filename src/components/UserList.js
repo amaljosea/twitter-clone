@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import SingleUser from './SingleUser'
 import { ListGroup, Alert } from 'react-bootstrap'
-import api from '../api/index'
 import Loading from './Loading'
 
-export const UserList = () => {
+export const UserList = ({ api }) => {
     const [users, setUsers] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
@@ -22,7 +21,7 @@ export const UserList = () => {
             try {
                 setError(false)
                 setLoading(true)
-                const response = await api.user.all()
+                const response = await api()
                 setUsers(response.data)
             }
             catch (e) {

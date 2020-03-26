@@ -7,6 +7,7 @@ import UserList from '../components/UserList'
 import FeedList from '../components/FeedList'
 import ProfileHead from '../components/ProfileHead'
 import './Profile.css'
+import api from '../api'
 const Profile = () => {
     const [activeTab, setActiveTab] = useState("post")
     return (
@@ -25,9 +26,9 @@ const Profile = () => {
                         <Nav.Link eventKey="following">Following</Nav.Link>
                     </Nav.Item>
                 </Nav>
-                {activeTab === "post" && <FeedList isOwn />}
-                {activeTab === "followers" && <UserList isOwn followers />}
-                {activeTab === "following" && <UserList isOwn following />}
+                {activeTab === "post" && <FeedList isOwn/>}
+                {activeTab === "followers" && <UserList api={api.user.followers}/>}
+                {activeTab === "following" && <UserList api={api.user.following} />}
             </TabsContainer>
         </Container>
     )
