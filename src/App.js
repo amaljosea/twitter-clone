@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createContext } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import firebaseApp from './firebase'
 import Feed from './pages/Feed'
@@ -8,11 +8,14 @@ import Signup from './pages/Signup'
 import Users from './pages/Users'
 import PrivateRoute from './components/PrivateRoute'
 import Loading from './components/Loading'
-
 import './App.scss';
-function App() {
 
+export const UserContext = createContext()
+
+function App() {
   const [state, setState] = useState({ loading: true, authenticated: false, user: null })
+  const [userDetails, setUserDetails] = useState({})
+
   const { authenticated, loading } = state;
 
   useEffect(() => {
@@ -23,6 +26,8 @@ function App() {
           currentUser: user,
           loading: false
         });
+        setUserDetails(JSON.parse(user.displayName)) //as there is no backend 
+        //now storing details as string in displayName in firebase, see SignUp
       } else {
         setState({
           authenticated: false,
@@ -32,24 +37,26 @@ function App() {
       }
     });
   }, [])
-  
+
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (
     <div >
       <BrowserRouter>
-        <Switch>
-          <Route path="/signup" component={Signup} exact={true} />
-          <Route path="/login" component={Login} exact={true} />
-          <PrivateRoute path="/feed" component={Feed} exact={true} authenticated={authenticated} />
-          <PrivateRoute path="/profile" component={Profile} exact={true} authenticated={authenticated} />
-          <PrivateRoute path="/users" component={Users} exact={true} authenticated={authenticated} />
-          <Route exact path="/" render={() => <Redirect to="/feed" />} />
-        </Switch>
+        <UserContext.Provider value={{ userDetails, setUserDetails }}>
+          <Switch>
+            <Route path="/signup" component={Signup} exact={true} />
+            <Route path="/login" component={Login} exact={true} />
+            <PrivateRoute path="/feed" component={Feed} exact={true} authenticated={authenticated} />
+            <PrivateRoute path="/profile" component={Profile} exact={true} authenticated={authenticated} />
+            <PrivateRoute path="/users" component={Users} exact={true} authenticated={authenticated} />
+            <Route exact path="/" render={() => <Redirect to="/feed" />} />
+          </Switch>
+        </UserContext.Provider>
       </BrowserRouter>
-    </div>
+    </div >
   );
 }
 

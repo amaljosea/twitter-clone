@@ -5,7 +5,6 @@ import { Button, Form, Row, Col } from 'react-bootstrap'
 import Container from '../components/Container'
 import './Signup.css'
 import firebaseApp from '../firebase'
-const db = firebaseApp.firestore()
 
 const Signup = (props) => {
     const [formValues, setFormValues] = useState({
@@ -19,23 +18,15 @@ const Signup = (props) => {
         try {
             const user = await firebaseApp.auth().createUserWithEmailAndPassword(formValues.email, formValues.password)
             console.log(user)
-            db.collection("users").get().then((snapshot) => {
-                snapshot.docs.forEach((i) => {
-                    console.log(i.data())
+            await firebaseApp.auth().currentUser.updateProfile({//as there is no backend 
+                //now storing details as string in displayName
+                displayName: JSON.stringify({
+                    displayName: formValues.name,
+                    followers: 3, //give same initial data as in mock
+                    following: 2,
+                    post: 3
                 })
-            })
-
-            db.collection("users").add({
-                id: user.user.uid,
-                name: formValues.name,
-                email: formValues.email,
-                followers: [],
-                following: [],
-                post: [{
-                    content: "Hey, I joined TweetX",
-                    time: Date.now()
-                }]
-            })
+            });
             props.history.push("/");
         } catch (error) {
 
