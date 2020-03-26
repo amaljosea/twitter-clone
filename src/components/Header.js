@@ -34,10 +34,10 @@ const Login = (props) => {
                 <Nav className="mr-auto">
                 </Nav>
                 <Nav>
-                    <Nav.Link className={window.location.href.includes("/feed") ? "active-nav" : ""} onClick={() => history.push('/feed')}>Feed</Nav.Link>
-                    <Nav.Link className={window.location.href.includes("/users") ? "active-nav" : ""} onClick={() => history.push('/users')}>Users</Nav.Link>
-                    <Nav.Link className={window.location.href.includes("/profile") ? "active-nav" : ""} onClick={() => history.push('/profile')}>Profile</Nav.Link>
-                    <Nav.Link onClick={handleSubmit}><b>Sign out</b></Nav.Link>
+                    <Nav.Link className={window.location.href.includes("/feed") ? "active-nav" : ""} onClick={() => history.push('/feed')}><b>Feed</b></Nav.Link>
+                    <Nav.Link className={window.location.href.includes("/users") ? "active-nav" : ""} onClick={() => history.push('/users')}><b>Users</b></Nav.Link>
+                    <Nav.Link className={window.location.href.includes("/profile") ? "active-nav" : ""} onClick={() => history.push('/profile')}><b>Profile</b></Nav.Link>
+                    <Nav.Link onClick={handleSubmit}>Sign out</Nav.Link>
                 </Nav>
             </Navbar.Collapse>}
         </Navbar>
