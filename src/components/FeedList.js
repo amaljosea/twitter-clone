@@ -1,37 +1,32 @@
 import React, { useState, useEffect } from 'react'
 import FeedCard from './FeedCard'
-import { Button, Form } from 'react-bootstrap'
-
-
-const data = [
-    {
-        id: 1,
-        name: "Amal Jose",
-        time: 1585157698273,
-        text: "Lorem"
-    },
-    {
-        id: 2,
-        name: "Amal Jose",
-        time: 1585157698273,
-        text: "Lorem"
-    },
-    {
-        id: 3,
-        name: "Ajay Jose",
-        time: 1585157698273,
-        text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially"
-    }
-]
-
+import Loading from './Loading'
+import { Button, Form, Alert } from 'react-bootstrap'
+import api from '../api/index'
 export const FeedList = ({ isOwn }) => {
     const [feeds, setFeeds] = useState([])
     const [tweet, setTweet] = useState("")
     const [showNewTweet, setShowNewTweet] = useState(false)
-
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
 
     useEffect(() => {
-        setFeeds(data)
+        const fetchFeeds = async () => {
+            const currentApi = isOwn ? api.tweet.own : api.tweet.all
+            try {
+                setLoading(true)
+                const data = await currentApi()
+                setFeeds(data.data)
+            }
+            catch (e) {
+                setError(true)
+            }
+            finally {
+                setLoading(false)
+            }
+
+        }
+        fetchFeeds()
     }, [])
 
     const handleSubmit = (event) => {
@@ -42,6 +37,8 @@ export const FeedList = ({ isOwn }) => {
     }
     return (
         <>
+            {loading && <Loading />}
+            {error && <Alert variant="danger">Something went wrong, Please reload</Alert>}
             {!isOwn && <>{showNewTweet ? <section>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group >
