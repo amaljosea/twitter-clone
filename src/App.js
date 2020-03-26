@@ -7,8 +7,9 @@ import Profile from './pages/Profile'
 import Signup from './pages/Signup'
 import Users from './pages/Users'
 import PrivateRoute from './components/PrivateRoute'
-import './App.scss';
+import Loading from './components/Loading'
 
+import './App.scss';
 function App() {
 
   const [state, setState] = useState({ loading: true, authenticated: false, user: null })
@@ -33,7 +34,7 @@ function App() {
   }, [])
   
   if (loading) {
-    return <p>Loading..</p>;
+    return <Loading/>;
   }
 
   return (

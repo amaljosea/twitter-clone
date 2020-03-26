@@ -19,6 +19,7 @@ const Login = (props) => {
 
         }
     }
+    console.log(window.location.href)
     return (
         <Navbar className="nav-color" collapseOnSelect expand="lg" bg="light" variant="light">
             <Navbar.Brand onClick={() => history.push('/')}>
@@ -33,10 +34,10 @@ const Login = (props) => {
                 <Nav className="mr-auto">
                 </Nav>
                 <Nav>
-                    <Nav.Link onClick={() => history.push('/feed')}>Feed</Nav.Link>
-                    <Nav.Link onClick={() => history.push('/users')}>Users</Nav.Link>
-                    <Nav.Link onClick={() => history.push('/profile')}>Profile</Nav.Link>
-                    <Nav.Link onClick={handleSubmit}>Sign out</Nav.Link>
+                    <Nav.Link className={window.location.href.includes("/feed") ? "active-nav" : ""} onClick={() => history.push('/feed')}>Feed</Nav.Link>
+                    <Nav.Link className={window.location.href.includes("/users") ? "active-nav" : ""} onClick={() => history.push('/users')}>Users</Nav.Link>
+                    <Nav.Link className={window.location.href.includes("/profile") ? "active-nav" : ""} onClick={() => history.push('/profile')}>Profile</Nav.Link>
+                    <Nav.Link onClick={handleSubmit}><b>Sign out</b></Nav.Link>
                 </Nav>
             </Navbar.Collapse>}
         </Navbar>
