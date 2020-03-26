@@ -3,6 +3,8 @@ import FeedCard from './FeedCard'
 import Loading from './Loading'
 import { Button, Form, Alert } from 'react-bootstrap'
 import api from '../api/index'
+import './FeedList.css'
+
 export const FeedList = ({ isOwn }) => {
     const [feeds, setFeeds] = useState([])
     const [tweet, setTweet] = useState("")
@@ -52,10 +54,10 @@ export const FeedList = ({ isOwn }) => {
     }
 
     return (
-        <>
+        <div className="feed-list-outer">
             {loading && <Loading />}
             {error && <Alert variant="danger">Something went wrong, Please reload</Alert>}
-            {!isOwn && <>{showNewTweet ? <section>
+            {!isOwn && !loading && !error && <>{showNewTweet ? <section>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group >
                         <Form.Control as="textarea" rows="3" placeholder="What is happening?" value={tweet} required onChange={(e) => {
@@ -71,7 +73,7 @@ export const FeedList = ({ isOwn }) => {
                 </Form>
             </section> : <Button onClick={() => setShowNewTweet(true)}>Write</Button>}</>}
             {feeds.map((feed) => <FeedCard {...feed} key={feed.id} />)}
-        </>
+        </div>
     )
 }
 
