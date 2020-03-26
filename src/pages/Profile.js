@@ -7,16 +7,8 @@ import UserList from '../components/UserList'
 import FeedList from '../components/FeedList'
 import ProfileHead from '../components/ProfileHead'
 
-
-const tabContent = {
-    followers: UserList,
-    post: FeedList,
-    following: UserList,
-}
-
 const Profile = () => {
     const [activeTab, setActiveTab] = useState("post")
-    const ActiveComponent = tabContent[activeTab]
     return (
         <Container>
             <Header displayLinks />
@@ -33,7 +25,9 @@ const Profile = () => {
                         <Nav.Link eventKey="following">Following</Nav.Link>
                     </Nav.Item>
                 </Nav>
-                <ActiveComponent activeTab={activeTab} />
+                {activeTab === "post" && <FeedList isOwn />}
+                {activeTab === "followers" && <UserList isOwn followers />}
+                {activeTab === "following" && <UserList isOwn following />}
             </TabsContainer>
         </Container>
     )
