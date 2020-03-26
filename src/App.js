@@ -20,6 +20,7 @@ function App() {
 
   useEffect(() => {
     firebaseApp.auth().onAuthStateChanged(user => {
+      debugger
       if (user) {
         setState({
           authenticated: true,

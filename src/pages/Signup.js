@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Header from '../components/Header'
 import ImageBackground from '../components/ImageBackground'
 import { Button, Form, Row, Col } from 'react-bootstrap'
 import Container from '../components/Container'
 import './Signup.css'
 import firebaseApp from '../firebase'
+import { UserContext } from '../App'
 
 const Signup = (props) => {
+    const { setUserDetails } = useContext(UserContext)
     const [formValues, setFormValues] = useState({
         name: "",
         email: "",
@@ -18,15 +20,17 @@ const Signup = (props) => {
         try {
             const user = await firebaseApp.auth().createUserWithEmailAndPassword(formValues.email, formValues.password)
             console.log(user)
-            await firebaseApp.auth().currentUser.updateProfile({//as there is no backend 
-                //now storing details as string in displayName
-                displayName: JSON.stringify({
-                    displayName: formValues.name,
-                    followers: 3, //give same initial data as in mock
-                    following: 2,
-                    post: 3
-                })
+
+            const userDetails = {
+                displayName: formValues.name,
+                followers: 3, //give same initial data as in mock apis
+                following: 2,
+                post: 3
+            }
+            await firebaseApp.auth().currentUser.updateProfile({//as there is no backend now storing details as string in displayName
+                displayName: JSON.stringify(userDetails)
             });
+            setUserDetails(userDetails)
             props.history.push("/");
         } catch (error) {
 
