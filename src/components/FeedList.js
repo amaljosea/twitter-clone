@@ -14,9 +14,10 @@ export const FeedList = ({ isOwn }) => {
         const fetchFeeds = async () => {
             const currentApi = isOwn ? api.tweet.own : api.tweet.all
             try {
+                setError(false)
                 setLoading(true)
-                const data = await currentApi()
-                setFeeds(data.data)
+                const response = await currentApi()
+                setFeeds(response.data)
             }
             catch (e) {
                 setError(true)
@@ -24,17 +25,33 @@ export const FeedList = ({ isOwn }) => {
             finally {
                 setLoading(false)
             }
-
         }
         fetchFeeds()
     }, [])
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         setShowNewTweet(false)
         event.preventDefault()
-        const newFeeds = [{ id: feeds.length + 1, name: "User", text: tweet, time: Date.now() }, ...feeds]
-        setFeeds(newFeeds)
+        try {
+            setError(false)
+            setLoading(true)
+            const newFeed = { id: feeds.length + 1, name: "User", text: tweet, time: Date.now() }
+            const response = await api.tweet.post(newFeed)
+            debugger
+
+            if (response.data.success) {
+                const a =[newFeed, ...feeds]
+                setFeeds([newFeed, ...feeds])
+            }
+        }
+        catch (e) {
+            setError(true)
+        }
+        finally {
+            setLoading(false)
+        }
     }
+    
     return (
         <>
             {loading && <Loading />}

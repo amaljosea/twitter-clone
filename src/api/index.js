@@ -3,7 +3,7 @@ const api = {
     tweet: {
         all: () => axios.get("/alltweet"),
         own: () => axios.get("/owntweet"),
-        post: (payload) => axios.post("/postweet", payload),
+        post: (payload) => axios.post("/posttweet", payload),
     },
     user: {
         details: () => axios.get("/userdetail"),
