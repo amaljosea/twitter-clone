@@ -18,11 +18,15 @@ const Signup = (props) => {
         repeatPassword: ""
     })
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(false)
+    const [error, setError] = useState("")
     const handleSubmit = async (event) => {
         event.preventDefault()
+        if (formValues.password !== formValues.repeatPassword) {
+            setError("Password mismatch")
+            return
+        }
         try {
-            setError(false)
+            setError("")
             setLoading(true)
             const user = await firebaseApp.auth().createUserWithEmailAndPassword(formValues.email, formValues.password)
             console.log(user)
@@ -39,7 +43,7 @@ const Signup = (props) => {
             setUserDetails(userDetails)
             props.history.push("/");
         } catch (error) {
-            setError(true)
+            setError("Something went wrong")
         } finally {
             setLoading(false)
         }
@@ -65,12 +69,12 @@ const Signup = (props) => {
                                 }} />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Control value={formValues.password} type="password" placeholder="Password" required onChange={(e) => {
+                                <Form.Control value={formValues.password} type="password" placeholder="Password" minLength={7} required onChange={(e) => {
                                     setFormValues({ ...formValues, password: e.target.value })
                                 }} />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Control value={formValues.repeatPassword} type="password" placeholder="Confirm Password" required onChange={(e) => {
+                                <Form.Control value={formValues.repeatPassword} type="password" minLength={7} placeholder="Confirm Password" required onChange={(e) => {
                                     setFormValues({ ...formValues, repeatPassword: e.target.value })
                                 }} />
                             </Form.Group>
@@ -81,7 +85,7 @@ const Signup = (props) => {
                             </div>
                             <div className="error-loading-container">
                                 {loading && <Spinner animation="border" variant="primary" />}
-                                {error && <Alert variant="danger">Something went wrong</Alert>}
+                                {error && <Alert variant="danger">{error}</Alert>}
                             </div>
                         </Form>
                     </Col>

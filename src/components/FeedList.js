@@ -57,19 +57,19 @@ export const FeedList = ({ isOwn }) => {
         <div className="feed-list-outer">
             {loading && <Loading />}
             {error && <Alert variant="danger">Something went wrong, Please reload</Alert>}
-            {!isOwn && !loading && !error && <>{showNewTweet ? <section>
+            {!isOwn && !error && <>{showNewTweet ? <section>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group >
                         <Form.Control as="textarea" rows="3" placeholder="What is happening?" value={tweet} required onChange={(e) => {
                             setTweet(e.target.value)
                         }} />
                     </Form.Group>
-                    <Button variant="primary" type="submit" className="submit-tweet">
-                        Submit
-                        </Button>
                     <Button variant="secondary" onClick={() => setShowNewTweet(false)}>
                         Discard
                         </Button>
+                    <Button variant="primary" type="submit" className="submit-tweet">
+                        Submit
+                    </Button>
                 </Form>
             </section> : <Button onClick={() => setShowNewTweet(true)}>Write</Button>}</>}
             {feeds.map((feed) => <FeedCard {...feed} key={feed.id} />)}
