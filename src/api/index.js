@@ -2,7 +2,7 @@ import axios from './axios'
 const api = {
     tweet: {
         all: () => axios.get("/alltweet"),
-        own: () => axios.get("/owntweet"),
+        own: () => axios.get("/alltweet"),
         post: (payload) => axios.post("/posttweet", payload),
     },
     user: {

@@ -40,7 +40,6 @@ export const FeedList = ({ isOwn }) => {
             debugger
 
             if (response.data.success) {
-                const a =[newFeed, ...feeds]
                 setFeeds([newFeed, ...feeds])
             }
         }
@@ -51,7 +50,7 @@ export const FeedList = ({ isOwn }) => {
             setLoading(false)
         }
     }
-    
+
     return (
         <>
             {loading && <Loading />}
@@ -71,7 +70,7 @@ export const FeedList = ({ isOwn }) => {
                         </Button>
                 </Form>
             </section> : <Button onClick={() => setShowNewTweet(true)}>Write</Button>}</>}
-            {feeds.map((feed) => <FeedCard {...feed} />)}
+            {feeds.map((feed) => <FeedCard {...feed} key={feed.id} />)}
         </>
     )
 }

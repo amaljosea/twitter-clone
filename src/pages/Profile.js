@@ -6,7 +6,7 @@ import { Nav } from 'react-bootstrap'
 import UserList from '../components/UserList'
 import FeedList from '../components/FeedList'
 import ProfileHead from '../components/ProfileHead'
-
+import './Profile.css'
 const Profile = () => {
     const [activeTab, setActiveTab] = useState("post")
     return (
@@ -14,7 +14,7 @@ const Profile = () => {
             <Header displayLinks />
             <TabsContainer>
                 <ProfileHead />
-                <Nav fill variant="tabs" activeKey={activeTab} onSelect={(eventKey) => { setActiveTab(eventKey) }}>
+                <Nav className="user-tabs" fill variant="tabs" activeKey={activeTab} onSelect={(eventKey) => { setActiveTab(eventKey) }}>
                     <Nav.Item >
                         <Nav.Link eventKey="post">Post</Nav.Link>
                     </Nav.Item>

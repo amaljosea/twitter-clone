@@ -41,7 +41,7 @@ export const UserList = () => {
 
     return (
         <ListGroup>
-            {users.map((user) => <SingleUser {...user} onFollowClick={onFollowClick} />)}
+            {users.map((user) => <SingleUser key={user.id} onFollowClick={onFollowClick} {...user}  />)}
         </ListGroup>
     )
 }
