@@ -1,27 +1,24 @@
 import React from 'react'
 import './FeedCard.css'
 import { Card } from 'react-bootstrap'
-import Avatar from '../images/cardAvatar.png'
-import Background from '../images/cardBackground.png'
+import dayjs from 'dayjs';
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
 
-const FeedCard = () => {
+const FeedCard = ({ name, time, text }) => {
     return (
         <Card className="feed-card">
             <div className="feed-card-content">
                 <div>
-                    <div className="feed-card-avathar">
-
-                    </div>
+                    <div className="feed-card-avathar" />
                 </div>
                 <Card.Body><div className="feed-card-header">
-                    <Card.Title>Special title treatment</Card.Title>
-                    <p>10 mins ago</p>
+                    <Card.Title>{name}</Card.Title>
+                    <p>{dayjs().to(time)}</p>
                 </div>
                     <Card.Text>
-                        With supporting text below as a natural lead-in to additional content.
-                        With supporting text below as a natural lead-in to additional content.
-                        With supporting text below as a natural lead-in to additional content.
-                         </Card.Text>
+                        {text}
+                    </Card.Text>
                 </Card.Body>
             </div>
         </Card>
