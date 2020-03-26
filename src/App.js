@@ -27,7 +27,7 @@ function App() {
           loading: false
         });
         setUserDetails(JSON.parse(user.displayName)) //as there is no backend 
-        //now storing details as string in displayName in firebase, see SignUp
+        //now storing current user details as string in displayName in firebase, see pages/SignUp
       } else {
         setState({
           authenticated: false,

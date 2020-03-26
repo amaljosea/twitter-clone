@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import SingleUser from './SingleUser'
 import { ListGroup, Alert } from 'react-bootstrap'
 import Loading from './Loading'
 import apis from '../api'
+import { UserContext } from '../App'
 
 export const UserList = ({ api }) => {
+    const { setUserDetails, userDetails } = useContext(UserContext)
+
     const [users, setUsers] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
@@ -20,6 +23,7 @@ export const UserList = ({ api }) => {
             const response = await apis.user.follow({ id })
             if (response.data.success) {
                 setUsers(newUser)
+                setUserDetails({ ...userDetails, following: userDetails.following + 1 })
             }
         }
         catch (e) {
