@@ -29,7 +29,7 @@ const AuthProvider = ({ children }) => {
     // if (!authenticated) return "Not Authenticated!"
     // return "Authenticated!"
     return (
-        <AuthContext.Provider value={{ loading, authenticated }}>
+        <AuthContext.Provider value={{ loading, authenticated, setAuthenticated }}>
             {children}
         </AuthContext.Provider>)
 }

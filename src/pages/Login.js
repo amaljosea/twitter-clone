@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Header from '../components/Header'
 import ImageBackground from '../components/ImageBackground'
 import Container from '../components/Container'
+import { AuthContext } from '../components/AuthProvider'
 import { Button, Form, Row, Col, Alert, Spinner } from 'react-bootstrap'
 import './Login.css'
-import firebaseApp from '../firebase'
+import graphql from '../graphql';
 
 const Login = (props) => {
+    const { setAuthenticated } = useContext(AuthContext)
     const [formValues, setFormValues] = useState({
         email: "",
         password: "",
@@ -18,9 +20,20 @@ const Login = (props) => {
         try {
             setError(false)
             setLoading(true)
-            const user = await firebaseApp.auth().signInWithEmailAndPassword(formValues.email, formValues.password)
-            console.log(user)
-            props.history.push("/");
+            const response = await graphql(`mutation signin($identity: String, $secret: String) {
+                authenticate: authenticateUserWithPassword(email: $identity, password: $secret) {
+                  item {
+                    id
+                  }
+                }
+              }`, {
+                identity: formValues.email,
+                secret: formValues.password
+            })
+            if(response.data.authenticate.item.id) {
+                setAuthenticated(true)
+                props.history.push("/");
+            }
         } catch (error) {
             setError(true)
         } finally {
