@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
 
-const FeedCard = ({ name, time, text }) => {
+const FeedCard = ({ dateCreated, author, content }) => {
     return (
         <Card className="feed-card">
             <div className="feed-card-content">
@@ -13,11 +13,11 @@ const FeedCard = ({ name, time, text }) => {
                     <div className="feed-card-avathar" />
                 </div>
                 <Card.Body><div className="feed-card-header">
-                    <Card.Title>{name}</Card.Title>
-                    <p>{dayjs().to(time)}</p>
+                    <Card.Title>{author.name}</Card.Title>
+                    <p>{dayjs().to(dateCreated)}</p>
                 </div>
                     <Card.Text>
-                        {text}
+                        {content}
                     </Card.Text>
                 </Card.Body>
             </div>

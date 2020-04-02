@@ -1,7 +1,11 @@
-import { axios1, axios2 } from './axios'
+import { axiosGraphQl, axios1, axios2 } from './axios'
+import { GET_ALL_TWEETS } from '../graphql/Tweet/query'
+
 const api = {
     tweet: {
-        all: () => axios1.get("/alltweet"),
+        all: () => axiosGraphQl.post("/", {
+            query: GET_ALL_TWEETS,
+        }),
         own: () => axios1.get("/alltweet"),
         post: (payload) => axios1.post("/posttweet", payload),
     },

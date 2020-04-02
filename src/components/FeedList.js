@@ -19,7 +19,7 @@ export const FeedList = ({ isOwn }) => {
                 setError(false)
                 setLoading(true)
                 const response = await currentApi()
-                setFeeds(response.data)
+                setFeeds(response.data.data.allTweets)
             }
             catch (e) {
                 setError(true)
@@ -39,8 +39,6 @@ export const FeedList = ({ isOwn }) => {
             setLoading(true)
             const newFeed = { id: feeds.length + 1, name: "User", text: tweet, time: Date.now() }
             const response = await api.tweet.post(newFeed)
-            debugger
-
             if (response.data.success) {
                 setFeeds([newFeed, ...feeds])
             }
