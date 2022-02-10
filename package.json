@@ -10,7 +10,7 @@
     "bootstrap": "^4.4.1",
     "dayjs": "^1.8.23",
     "firebase": "^7.12.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",
     "react-dom": "^16.13.1",
